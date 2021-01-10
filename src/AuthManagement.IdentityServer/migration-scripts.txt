@@ -8,7 +8,7 @@ dotnet ef database update -c ApplicationDbContext
 
 #### Migrations for IdentityServer
 ## From powershell, navigate to .csproj directory
-## Run below to create migration files for Identity
+## Run below to create migration files for IdentityServer
 dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServerMigrations/PersistedGrantDb
 dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServerMigrations/ConfigurationDb
 ## Run below to apply migrations for Identity into database
