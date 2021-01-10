@@ -30,6 +30,14 @@ namespace AuthManagement.IdentityServer.Data.Seeds
                     }
                 }
 
+                if (!ctx.IdentityResources.Any())
+                {
+                    foreach (var identityResource in IdentityResources)
+                    {
+                        await ctx.IdentityResources.AddAsync(identityResource.ToEntity());
+                    }
+                }
+
                 await ctx.SaveChangesAsync();
             }
         }
@@ -44,8 +52,20 @@ namespace AuthManagement.IdentityServer.Data.Seeds
         {
             new ApiResource("weatherapi")
             {
-                Scopes = new List<string> { "weatherapi.read", "weatherapi.write"   },
+                Scopes = new List<string> { "weatherapi.read", "weatherapi.write" },
                 ApiSecrets = new List<Secret> {new Secret("ScopeSecret".Sha256())},
+                UserClaims = new List<string> {"role"}
+            }
+        };
+
+        private static IEnumerable<IdentityResource> IdentityResources => new[]
+        {
+            new IdentityResources.OpenId(),
+            // Don't know below. Need to google
+            //new IdentityResources.Profile(),
+            new IdentityResource
+            {
+                Name = "role",
                 UserClaims = new List<string> {"role"}
             }
         };
