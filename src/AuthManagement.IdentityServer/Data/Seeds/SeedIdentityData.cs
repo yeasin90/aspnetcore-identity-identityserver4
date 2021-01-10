@@ -11,12 +11,9 @@ namespace AuthManagement.IdentityServer.Data.Seeds
     {
         public static async Task SeedAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            Log.Information("Started database seed");
-
             Log.Information("Started seeding user roles");
             await SeedRolesAsync(roleManager);
             Log.Information("Finished seeding user roles");
-
 
             Log.Information("Started seeding users");
             await SeedUsersAsync(userManager, "user1", "user1@user1.com", "123456", UserRoles.Admin, new Claim[]
@@ -35,8 +32,6 @@ namespace AuthManagement.IdentityServer.Data.Seeds
                     new Claim("location", "somewhere")
                 });
             Log.Information("Finished seeding users");
-
-            Log.Information("Finished seeding database");
         }
 
         private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
