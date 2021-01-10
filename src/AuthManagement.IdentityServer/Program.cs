@@ -1,4 +1,7 @@
+using AuthManagement.IdentityServer.Data;
 using AuthManagement.IdentityServer.Data.Seeds;
+using AuthManagement.IdentityServer.Extensions;
+using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +19,7 @@ namespace AuthManagement.IdentityServer
         {
             ConfigureLogger();
             var host = CreateHostBuilder(args).Build();
+            ApplyMigrations(host);
             await SeedDatabase(host);
             host.Run();
         }
@@ -58,6 +62,24 @@ namespace AuthManagement.IdentityServer
 
                 await SeedIdentityData.SeedAsync(userManager, roleManager);
             }
+        }
+
+        /// <summary>
+        /// Apply database migrations for Identity and IdentityServer
+        /// IdentityServer internally has two db context
+        /// check : migration-scripts.txt file for migration commands
+        /// </summary>
+        /// <param name="host"></param>
+        private static void ApplyMigrations(IHost host)
+        {
+            Log.Information("Applying migrations");
+            // For Identity
+            host.ApplyMigration<ApplicationDbContext>();
+            // For IdentityServer's internal PersistedGrantDbContext
+            host.ApplyMigration<PersistedGrantDbContext>();
+            // For IdentityServer's internal ConfigurationDbContext
+            host.ApplyMigration<ConfigurationDbContext>();
+            Log.Information("Finished migration apply");
         }
     }
 }
