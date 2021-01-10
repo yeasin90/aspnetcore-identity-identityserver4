@@ -14,11 +14,19 @@ namespace AuthManagement.IdentityServer.Data.Seeds
         {
             using (var ctx = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>())
             {
-                if(!ctx.ApiScopes.Any())
+                if (!ctx.ApiScopes.Any())
                 {
-                    foreach(var apiScope in ApiScopes)
+                    foreach (var apiScope in ApiScopes)
                     {
                         await ctx.ApiScopes.AddAsync(apiScope.ToEntity());
+                    }
+                }
+
+                if (!ctx.ApiResources.Any())
+                {
+                    foreach (var apiResource in ApiResources)
+                    {
+                        await ctx.ApiResources.AddAsync(apiResource.ToEntity());
                     }
                 }
 
@@ -30,6 +38,16 @@ namespace AuthManagement.IdentityServer.Data.Seeds
         {
             new ApiScope("weatherapi.read"),
             new ApiScope("weatherapi.write"),
+        };
+
+        private static IEnumerable<ApiResource> ApiResources => new[]
+        {
+            new ApiResource("weatherapi")
+            {
+                Scopes = new List<string> { "weatherapi.read", "weatherapi.write"   },
+                ApiSecrets = new List<Secret> {new Secret("ScopeSecret".Sha256())},
+                UserClaims = new List<string> {"role"}
+            }
         };
     }
 }
