@@ -1,2 +1,4 @@
-# aspnetcore-identity-identityserver4
-Authorization management with ASP.NET Core Identity and IdentityServer4
+# ASP.NET Core IdentityServer4 and Identity
+Authorization management using ASP.NET Core Identity and IdentityServer4
+
+
