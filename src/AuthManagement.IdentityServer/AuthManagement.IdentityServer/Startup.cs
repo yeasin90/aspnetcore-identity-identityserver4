@@ -22,6 +22,8 @@ namespace AuthManagement.IdentityServer
             services.ConfigureSqLite(Configuration);
 
             services.ConfigureIdentity();
+
+            services.ConfigureIdentityServer(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
