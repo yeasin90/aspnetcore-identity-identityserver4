@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System;
 using System.Threading.Tasks;
 
 namespace AuthManagement.IdentityServer
@@ -12,11 +13,18 @@ namespace AuthManagement.IdentityServer
     {
         public static async Task Main(string[] args)
         {
-            ConfigureLogger();
-            var host = CreateHostBuilder(args).Build();
-            host.ApplyDbMigration();
-            await host.SeedDatabase();
-            host.Run();
+            try
+            {
+                ConfigureLogger();
+                var host = CreateHostBuilder(args).Build();
+                host.ApplyDbMigration();
+                await host.SeedDatabase();
+                host.Run();
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex, "Error on initializing application");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

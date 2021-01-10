@@ -36,50 +36,36 @@ namespace AuthManagement.IdentityServer.Data.Seeds
 
         private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
         {
-            try
-            {
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin.ToString()));
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin.ToString()));
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Moderator.ToString()));
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Basic.ToString()));
-            }
-            catch(Exception ex)
-            {
-                Log.Error(ex, $"Error on {nameof(SeedRolesAsync)}");
-            }
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Moderator.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Basic.ToString()));
         }
 
         private static async Task SeedUsersAsync(UserManager<IdentityUser> userManager, string username,
             string email, string password, UserRoles role, Claim[] claims)
         {
-            try
+            var existingUser = await userManager.FindByNameAsync(username);
+
+            if (existingUser != null)
             {
-                var existingUser = await userManager.FindByNameAsync(username);
-
-                if(existingUser != null)
-                {
-                    Log.Information($"User {username} already exist!");
-                    return;
-                }
-
-                if (existingUser == null)
-                {
-                    var newUser = new IdentityUser()
-                    {
-                        UserName = username,
-                        Email = email,
-                        EmailConfirmed = true,
-                        PhoneNumberConfirmed = true
-                    };
-
-                    await userManager.CreateAsync(newUser, password);
-                    await userManager.AddClaimsAsync(newUser, claims);
-                    await userManager.AddToRoleAsync(newUser, role.ToString());
-                }
+                Log.Information($"User {username} already exist!");
+                return;
             }
-            catch(Exception ex)
+
+            if (existingUser == null)
             {
-                Log.Error(ex, $"Error on {nameof(SeedUsersAsync)}");
+                var newUser = new IdentityUser()
+                {
+                    UserName = username,
+                    Email = email,
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true
+                };
+
+                await userManager.CreateAsync(newUser, password);
+                await userManager.AddClaimsAsync(newUser, claims);
+                await userManager.AddToRoleAsync(newUser, role.ToString());
             }
         }
     }
