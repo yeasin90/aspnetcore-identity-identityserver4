@@ -1,5 +1,4 @@
 ﻿using AuthManagement.IdentityServer.Data.Seeds;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -16,27 +15,13 @@ namespace AuthManagement.IdentityServer.Extensions
     {
         public static async Task SeedDatabase(this IHost host)
         {
+            Log.Information("Start database seed");
             using (var scope = host.Services.CreateScope())
             {
-                await SeedIdentityDatabase(scope);
-                await SeedIdentityServerDatabase(scope);
+                await SeedIdentityData.SeedAsync(scope);
+                await SeedIdentityServerData.SeedAsync(scope);
             }
-        }
-
-        private static async Task SeedIdentityDatabase(IServiceScope scope)
-        {
-            var services = scope.ServiceProvider;
-            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-            Log.Information("Started Identity database seed");
-            await SeedIdentityData.SeedAsync(userManager, roleManager);
-            Log.Information("Finished Identity seeding database");
-        }
-
-        private static async Task SeedIdentityServerDatabase(IServiceScope scope)
-        {
-            await SeedIdentityServerData.SeedAsync(scope);
+            Log.Information("Finished database seed");
         }
     }
 }

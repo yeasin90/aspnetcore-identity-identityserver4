@@ -1,7 +1,7 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -9,12 +9,27 @@ namespace AuthManagement.IdentityServer.Data.Seeds
 {
     public static class SeedIdentityData
     {
-        public static async Task SeedAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(IServiceScope scope)
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            await SeedRolesAsync(roleManager);
+            await SeedUsersAsync(userManager);
+        }
+
+        private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
         {
             Log.Information("Started seeding user roles");
-            await SeedRolesAsync(roleManager);
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Moderator.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Basic.ToString()));
             Log.Information("Finished seeding user roles");
+        }
 
+        private static async Task SeedUsersAsync(UserManager<IdentityUser> userManager)
+        {
             Log.Information("Started seeding users");
             await SeedUsersAsync(userManager, "user1", "user1@user1.com", "123456", UserRoles.Admin, new Claim[]
                 {
@@ -32,14 +47,6 @@ namespace AuthManagement.IdentityServer.Data.Seeds
                     new Claim("location", "somewhere")
                 });
             Log.Information("Finished seeding users");
-        }
-
-        private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
-        {
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin.ToString()));
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin.ToString()));
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Moderator.ToString()));
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Basic.ToString()));
         }
 
         private static async Task SeedUsersAsync(UserManager<IdentityUser> userManager, string username,
