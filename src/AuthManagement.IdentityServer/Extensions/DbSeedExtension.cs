@@ -36,7 +36,7 @@ namespace AuthManagement.IdentityServer.Extensions
 
         private static async Task SeedIdentityServerDatabase(IServiceScope scope)
         {
-            
+            await SeedIdentityServerData.SeedAsync(scope);
         }
     }
 }
