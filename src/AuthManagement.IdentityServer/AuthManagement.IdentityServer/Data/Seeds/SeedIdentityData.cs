@@ -36,7 +36,7 @@ namespace AuthManagement.IdentityServer.Data.Seeds
                 });
             Log.Information("Finished seeding users");
 
-            Log.Information("Finisehd seeding database");
+            Log.Information("Finished seeding database");
         }
 
         private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
