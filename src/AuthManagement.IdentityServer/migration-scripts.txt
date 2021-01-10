@@ -1,8 +1,8 @@
 ﻿#### Migrations for Identity
 ## Install Microsoft.EntityFrameworkCore.Design nuget
 ## From powershell, navigate to .csproj directory
-## Run below to create migration files
+## Run below to create migration files for Identity
 dotnet ef migrations add InitialIdentityMigration -c ApplicationDbContext -o Data/Migrations/IdentityMigrations
-## Run below to apply migrations into database
+## Run below to apply migrations for Identity into database
 dotnet ef database update -c ApplicationDbContext
 
