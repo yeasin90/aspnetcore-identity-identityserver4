@@ -1,4 +1,5 @@
 ﻿using AuthManagement.IdentityServer.Data;
+using AuthManagement.IdentityServer.Models;
 using AuthManagement.IdentityServer.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ namespace AuthManagement.IdentityServer.Extensions
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>(); ;
+              .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>();
         }
     }
 }

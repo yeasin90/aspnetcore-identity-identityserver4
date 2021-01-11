@@ -1,6 +1,6 @@
-﻿namespace AuthManagement.IdentityServer.Data
+﻿namespace AuthManagement.IdentityServer.Models
 {
-    public enum UserRoles
+    public enum RoleTypes
     {
         SuperAdmin,
         Admin,
