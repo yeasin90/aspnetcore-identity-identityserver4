@@ -1,5 +1,5 @@
 # ASP.NET Core IdentityServer4 and Identity
-Authorization management using ASP.NET Core Identity and IdentityServer4. This codebase will give an idea how Identity and Identity server can work side by side with EfCore Sqlite. I have used Sqlite for simplicity. You can replace with SqlServer.
+Authorization management using ASP.NET Core Identity and IdentityServer4. This codebase will give an idea how Identity and IdentityServer works side by side using EfCore Sqlite. I have used Sqlite for simplicity. It's easily configurable to use SqlServer.
 
 ### Features: 
 - EfCore with Sqlite
