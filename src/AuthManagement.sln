@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthManagement.IdentityServer", "AuthManagement.IdentityServer\AuthManagement.IdentityServer.csproj", "{72280469-4C22-445E-8FB2-69AFCDA4F03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthManagement.IdentityServer", "IdentityServer\AuthManagement.IdentityServer.csproj", "{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{72280469-4C22-445E-8FB2-69AFCDA4F03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72280469-4C22-445E-8FB2-69AFCDA4F03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72280469-4C22-445E-8FB2-69AFCDA4F03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72280469-4C22-445E-8FB2-69AFCDA4F03E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
