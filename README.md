@@ -12,6 +12,7 @@ Just clone the repo and press F5. It will automatically create AuthorizationMana
 
 ### References : 
 - [AccessToken Vs ID Token Vs Refresh Token](https://www.c-sharpcorner.com/article/accesstoken-vs-id-token-vs-refresh-token-what-whywhen/)
+- [Set Token timeout in IdentityServer4](https://github.com/IdentityServer/IdentityServer4/issues/857)
 
 
 
