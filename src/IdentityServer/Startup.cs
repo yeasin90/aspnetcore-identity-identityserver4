@@ -45,6 +45,7 @@ namespace AuthManagement.IdentityServer
             await InitializeDb(serviceProvider);
 
             app.UseRouting();
+            app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {
