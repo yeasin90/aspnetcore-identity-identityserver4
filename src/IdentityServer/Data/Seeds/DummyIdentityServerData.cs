@@ -43,24 +43,14 @@ namespace AuthManagement.IdentityServer.Data.Seeds
                          ClientSecrets = { new Secret("eb300de4-add9-42f4-a3ac-abd3c60f1919".Sha256()) },
                          AllowedGrantTypes = GrantTypes.ClientCredentials,
                          AllowedScopes = new List<string> { "app.api.whatever.read", "app.api.whatever.write" },
-                         AccessTokenLifetime = 180 // 180s = 3min
                     },
                     new Client
                     {
                          ClientName = "Client for Weather",
                          ClientId = "3X=nNv?Sgu$S",
                          ClientSecrets = { new Secret("1554db43-3015-47a8-a748-55bd76b6af48".Sha256()) },
-                         // AllowedGrantTypes = GrantTypes.ClientCredentials means,
-                         // client must include client_id={this.ClientId} and client_secret={this.ClientSecrets} 
-                         // in the requeste body to request an Access token from IdentityServer
                          AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                         // this client is only allowed to read Weather data,
                          AllowedScopes = new List<string> { "app.api.weather.read" }, 
-                         
-                         // AccessTolenLifetime
-                         // Check how to configure : https://github.com/IdentityServer/IdentityServer4/issues/857
-                         AccessTokenLifetime = 180 // 180s = 3min
                     }
             };
     }
