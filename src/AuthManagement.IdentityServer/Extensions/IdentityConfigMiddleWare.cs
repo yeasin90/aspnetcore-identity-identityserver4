@@ -1,4 +1,5 @@
 ﻿using AuthManagement.IdentityServer.Data;
+using AuthManagement.IdentityServer.Models;
 using AuthManagement.IdentityServer.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AuthManagement.IdentityServer.Data.Seeds;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,25 +11,40 @@ namespace AuthManagement.IdentityServer.Extensions
     {
         public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
         {
+            services
+                .AddIdentityServer()
+                .AddAspNetIdentity<IdentityUser>() // nuget : IdentityServer4.AspNetIdentity
+                .UseDatabaseStore(configuration) // Replace with UseInmemoryStore() to use in-memory version
+                .AddDeveloperSigningCredential(); // don't use this in production. Check google how to read from a real certificate
+        }
+
+        private static IIdentityServerBuilder UseDatabaseStore(this IIdentityServerBuilder builder, IConfiguration configuration)
+        {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            services.AddIdentityServer()
-            // nuget for AddAspNetIdentity : IdentityServer4.AspNetIdentity
-            .AddAspNetIdentity<IdentityUser>()
-            // nuget for AddConfigurationStore : IdentityServer4.EntityFramework
-            .AddConfigurationStore(options =>
-            {
-                options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
-                    opt => opt.MigrationsAssembly(migrationsAssembly));
-            })
-            // nuget for AddConfigurationStore : IdentityServer4.EntityFramework
+            return
+                // nuget : IdentityServer4.EntityFramework
+                builder.AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
+                        opt => opt.MigrationsAssembly(migrationsAssembly));
+                })
+            // nuget : IdentityServer4.EntityFramework
             .AddOperationalStore(options =>
             {
                 options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
                     opt => opt.MigrationsAssembly(migrationsAssembly));
-            })
-            .AddDeveloperSigningCredential();
+            });
+        }
+
+        private static IIdentityServerBuilder UseInmemoryStore(this IIdentityServerBuilder builder)
+        {
+            return builder
+                .AddInMemoryIdentityResources(SeedIdentityServerData.IdentityResources)
+                .AddInMemoryApiResources(SeedIdentityServerData.ApiResources)
+                .AddInMemoryApiScopes(SeedIdentityServerData.ApiScopes);
+                //.AddInMemoryClients(Config.Clients)
         }
     }
 }

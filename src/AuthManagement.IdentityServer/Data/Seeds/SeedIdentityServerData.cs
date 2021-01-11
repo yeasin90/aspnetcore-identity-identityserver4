@@ -42,13 +42,13 @@ namespace AuthManagement.IdentityServer.Data.Seeds
             }
         }
 
-        private static IEnumerable<ApiScope> ApiScopes => new[]
+        public static IEnumerable<ApiScope> ApiScopes => new[]
         {
             new ApiScope("weatherapi.read"),
             new ApiScope("weatherapi.write"),
         };
 
-        private static IEnumerable<ApiResource> ApiResources => new[]
+        public static IEnumerable<ApiResource> ApiResources => new[]
         {
             new ApiResource("weatherapi")
             {
@@ -58,7 +58,7 @@ namespace AuthManagement.IdentityServer.Data.Seeds
             }
         };
 
-        private static IEnumerable<IdentityResource> IdentityResources => new[]
+        public static IEnumerable<IdentityResource> IdentityResources => new[]
         {
             new IdentityResources.OpenId(),
             // Don't know below. Need to google
