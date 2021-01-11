@@ -5,33 +5,17 @@ namespace AuthManagement.IdentityServer.Data.Seeds
 {
     public static class DummyIdentityServerData
     {
-        public static List<ApiScope> ApiScopes => new List<ApiScope>
-        {
-            new ApiScope("weatherapi.read"),
-            new ApiScope("weatherapi.write"),
-        };
-
-        public static List<ApiResource> ApiResources => new List<ApiResource>
-        {
-            new ApiResource("weatherapi")
+        public static IEnumerable<ApiResource> Apis =>
+            new List<ApiResource>
             {
-                Scopes = new List<string> { "weatherapi.read", "weatherapi.write" },
-                ApiSecrets = new List<Secret> {new Secret("ScopeSecret".Sha256())},
-                UserClaims = new List<string> {"role"}
-            }
-        };
-
-        public static List<IdentityResource> IdentityResources => new List<IdentityResource>
-        {
-            new IdentityResources.OpenId(),
-            // Don't know below. Need to google
-            //new IdentityResources.Profile(),
-            new IdentityResource
-            {
-                Name = "role",
-                UserClaims = new List<string> {"role"}
-            }
-        };
+                new ApiResource {
+                    Name = "app.api.whatever",
+                    DisplayName = "Whatever Apis",
+                    ApiSecrets = { new Secret("a75a559d-1dab-4c65-9bc0-f8e590cb388d".Sha256()) },
+                    Scopes = new List<string> { "app.api.whatever.read", "app.api.whatever.write", "app.api.whatever.full" }
+                },
+                new ApiResource("app.api.weather","Weather Apis")
+            };
 
         public static List<Client> Clients => new List<Client>
             {

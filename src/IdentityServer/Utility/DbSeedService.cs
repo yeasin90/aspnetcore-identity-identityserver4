@@ -34,27 +34,11 @@ namespace AuthManagement.IdentityServer.Utility
         {
             using (var ctx = configurationDbContext)
             {
-                if (!ctx.ApiScopes.Any())
-                {
-                    foreach (var apiScope in DummyIdentityServerData.ApiScopes)
-                    {
-                        await ctx.ApiScopes.AddAsync(apiScope.ToEntity());
-                    }
-                }
-
                 if (!ctx.ApiResources.Any())
                 {
-                    foreach (var apiResource in DummyIdentityServerData.ApiResources)
+                    foreach (var apiResource in DummyIdentityServerData.Apis)
                     {
                         await ctx.ApiResources.AddAsync(apiResource.ToEntity());
-                    }
-                }
-
-                if (!ctx.IdentityResources.Any())
-                {
-                    foreach (var identityResource in DummyIdentityServerData.IdentityResources)
-                    {
-                        await ctx.IdentityResources.AddAsync(identityResource.ToEntity());
                     }
                 }
 
