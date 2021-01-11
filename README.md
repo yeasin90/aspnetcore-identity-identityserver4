@@ -12,7 +12,7 @@ Just clone the repo and press F5. It will automatically create AuthorizationMana
 
 ### Get AccessToken from IdentityServer
 - Run the app using F5
-- Send a request to IdentityServer using POSTMAN. You will receive an AccessToken
+- Send a request to IdentityServer using POSTMAN. You will receive an AccessToken. By defauly, AccessToken expiration time is 1hour.
 ![Postman request for AccessToken from IdentityServer](https://user-images.githubusercontent.com/8789577/104222221-31954780-546c-11eb-9089-d7ba8a2c65c7.JPG)
 
 ### Issues
