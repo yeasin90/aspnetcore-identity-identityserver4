@@ -58,6 +58,14 @@ namespace AuthManagement.IdentityServer.Utility
                     }
                 }
 
+                if (!ctx.Clients.Any())
+                {
+                    foreach (var client in DummyIdentityServerData.Clients)
+                    {
+                        await ctx.Clients.AddAsync(client.ToEntity());
+                    }
+                }
+
                 await ctx.SaveChangesAsync();
             }
         }
