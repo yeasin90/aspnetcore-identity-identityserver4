@@ -12,8 +12,11 @@ Just clone the repo and press F5. It will automatically create AuthorizationMana
 
 ### Get AccessToken from IdentityServer
 - Run the app using F5
-- Send a request to IdentityServer using POSTMAN. You will receive an AccessToken. By defauly, AccessToken expiration time is 1hour.
+- Send a request to IdentityServer using POSTMAN. You will receive an AccessToken (in JWT format). By default, AccessToken expiration time is 1hour.
 ![Postman request for AccessToken from IdentityServer](https://user-images.githubusercontent.com/8789577/104222221-31954780-546c-11eb-9089-d7ba8a2c65c7.JPG)
+- Copy the AccessToken. Go to [jwt.ms](https://jwt.ms/) and decode 
+![Decoded AccessToken](https://user-images.githubusercontent.com/8789577/104223632-1592a580-546e-11eb-94bf-b0739964379f.JPG)
+
 
 ### Issues
 - Cannot support both InMemory and DbStore with IdentityServer4
