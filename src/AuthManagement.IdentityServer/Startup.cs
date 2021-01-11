@@ -25,7 +25,7 @@ namespace AuthManagement.IdentityServer
 
             services.ConfigureIdentity();
 
-            services.ConfigureIdentityServer(Configuration);
+            services.ConfigureIdentityServer();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

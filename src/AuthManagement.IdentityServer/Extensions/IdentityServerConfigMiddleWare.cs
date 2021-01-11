@@ -11,7 +11,7 @@ namespace AuthManagement.IdentityServer.Extensions
 {
     public static class IdentityServerConfigMiddleWare
     {
-        public static void ConfigureIdentityServer(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureIdentityServer(this IServiceCollection services)
         {
             services
                 .AddIdentityServer()
