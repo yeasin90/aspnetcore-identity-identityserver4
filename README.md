@@ -10,6 +10,11 @@ Authorization management using ASP.NET Core Identity and IdentityServer4. This c
 ### How to run the project: 
 Just clone the repo and press F5. It will automatically create AuthorizationManagement.db Sqlite database and populate with some dummy data related to Identity and IdentityServer.
 
+### Get AccessToken from IdentityServer
+- Run the app using F5
+- Send a request to IdentityServer using POSTMAN. You will receive an AccessToken
+![Postman request for AccessToken from IdentityServer](https://user-images.githubusercontent.com/8789577/104222221-31954780-546c-11eb-9089-d7ba8a2c65c7.JPG)
+
 ### Issues
 - Cannot support both InMemory and DbStore with IdentityServer4
 
