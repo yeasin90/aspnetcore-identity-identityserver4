@@ -33,9 +33,7 @@ namespace AuthManagement.IdentityServer.Extensions
         private static IIdentityServerBuilder UseInmemoryStore(this IIdentityServerBuilder builder)
         {
             return builder
-                .AddInMemoryIdentityResources(DummyIdentityServerData.IdentityResources)
-                .AddInMemoryApiResources(DummyIdentityServerData.ApiResources)
-                .AddInMemoryApiScopes(DummyIdentityServerData.ApiScopes)
+                .AddInMemoryApiResources(DummyIdentityServerData.Apis)
                 .AddInMemoryClients(DummyIdentityServerData.Clients);
         }
     }
