@@ -10,5 +10,8 @@ Authorization management using ASP.NET Core Identity and IdentityServer4. This c
 ### How to run the project: 
 Just clone the repo and press F5. It will automatically create AuthorizationManagement.db Sqlite database and populate with some dummy data related to Identity and IdentityServer.
 
+### References : 
+- [AccessToken Vs ID Token Vs Refresh Token](https://www.c-sharpcorner.com/article/accesstoken-vs-id-token-vs-refresh-token-what-whywhen/)
+
 
 
