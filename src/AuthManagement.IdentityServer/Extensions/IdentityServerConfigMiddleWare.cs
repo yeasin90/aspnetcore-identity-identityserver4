@@ -44,10 +44,10 @@ namespace AuthManagement.IdentityServer.Extensions
         private static IIdentityServerBuilder UseInmemoryStore(this IIdentityServerBuilder builder)
         {
             return builder
-                .AddInMemoryIdentityResources(SeedIdentityServerData.IdentityResources)
-                .AddInMemoryApiResources(SeedIdentityServerData.ApiResources)
-                .AddInMemoryApiScopes(SeedIdentityServerData.ApiScopes)
-                .AddInMemoryClients(SeedIdentityServerData.Clients);
+                .AddInMemoryIdentityResources(DummyIdentityServerData.IdentityResources)
+                .AddInMemoryApiResources(DummyIdentityServerData.ApiResources)
+                .AddInMemoryApiScopes(DummyIdentityServerData.ApiScopes)
+                .AddInMemoryClients(DummyIdentityServerData.Clients);
         }
     }
 }

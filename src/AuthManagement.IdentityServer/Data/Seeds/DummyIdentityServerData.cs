@@ -1,47 +1,10 @@
-﻿using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Mappers;
-using IdentityServer4.Models;
-using Microsoft.Extensions.DependencyInjection;
+﻿using IdentityServer4.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AuthManagement.IdentityServer.Data.Seeds
 {
-    public static class SeedIdentityServerData
+    public static class DummyIdentityServerData
     {
-        public static async Task SeedAsync(IServiceScope scope)
-        {
-            using (var ctx = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>())
-            {
-                if (!ctx.ApiScopes.Any())
-                {
-                    foreach (var apiScope in ApiScopes)
-                    {
-                        await ctx.ApiScopes.AddAsync(apiScope.ToEntity());
-                    }
-                }
-
-                if (!ctx.ApiResources.Any())
-                {
-                    foreach (var apiResource in ApiResources)
-                    {
-                        await ctx.ApiResources.AddAsync(apiResource.ToEntity());
-                    }
-                }
-
-                if (!ctx.IdentityResources.Any())
-                {
-                    foreach (var identityResource in IdentityResources)
-                    {
-                        await ctx.IdentityResources.AddAsync(identityResource.ToEntity());
-                    }
-                }
-
-                await ctx.SaveChangesAsync();
-            }
-        }
-
         public static List<ApiScope> ApiScopes => new List<ApiScope>
         {
             new ApiScope("weatherapi.read"),

@@ -1,10 +1,13 @@
 using AuthManagement.IdentityServer.Extensions;
+using AuthManagement.IdentityServer.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
 
 namespace AuthManagement.IdentityServer
 {
@@ -26,14 +29,20 @@ namespace AuthManagement.IdentityServer
             services.ConfigureIdentity();
 
             services.ConfigureIdentityServer();
+
+            services.AddScoped<IDbMigrationService, DbMigrationService>();
+            services.AddScoped<IDbSeedService, DbSeedService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Apply migrations and initialize database with dummy data
+            await InitializeDb(serviceProvider);
 
             app.UseRouting();
 
@@ -44,6 +53,16 @@ namespace AuthManagement.IdentityServer
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+        }
+
+        private async Task InitializeDb(IServiceProvider serviceProvider)
+        {
+            var migrationService = serviceProvider.GetService<IDbMigrationService>();
+            var dbSeedService = serviceProvider.GetService<IDbSeedService>();
+
+            await migrationService.ApplyMigration();
+            await dbSeedService.SeedIdentityDb();
+            await dbSeedService.SeedIdentityServerDb();
         }
     }
 }

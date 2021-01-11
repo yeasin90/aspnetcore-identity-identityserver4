@@ -11,14 +11,12 @@ namespace AuthManagement.IdentityServer
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
                 ConfigureLogger();
                 var host = CreateHostBuilder(args).Build();
-                host.ApplyDbMigration();
-                await host.SeedDatabase();
                 host.Run();
             }
             catch(Exception ex)
