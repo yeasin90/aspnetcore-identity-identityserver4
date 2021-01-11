@@ -1,6 +1,6 @@
 ﻿namespace AuthManagement.IdentityServer.Models
 {
-    public class SqliteConfiguration
+    public class SqlServerConfiguration
     {
         public string ConnectionString { get; set; }
     }

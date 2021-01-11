@@ -1,11 +1,6 @@
 ﻿using AuthManagement.IdentityServer.Data.Seeds;
-using AuthManagement.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System.Reflection;
 
 namespace AuthManagement.IdentityServer.Extensions
 {
@@ -22,22 +17,16 @@ namespace AuthManagement.IdentityServer.Extensions
 
         private static IIdentityServerBuilder UseDatabaseStore(this IIdentityServerBuilder builder, IServiceCollection services)
         {
-            var sqliteConfiguration = services.BuildServiceProvider().GetService<IOptions<SqliteConfiguration>>();
-            var connectionString = sqliteConfiguration.Value.ConnectionStrings;
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-
             return builder
                 // nuget : IdentityServer4.EntityFramework
                 .AddConfigurationStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
-                        opt => opt.MigrationsAssembly(migrationsAssembly));
+                    options.ConfigureDbContext = builder => builder.BuildSqlite(services);
                 })
                 // nuget : IdentityServer4.EntityFramework
                 .AddOperationalStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
-                        opt => opt.MigrationsAssembly(migrationsAssembly));
+                    options.ConfigureDbContext = builder => builder.BuildSqlite(services);
                 });
         }
 
