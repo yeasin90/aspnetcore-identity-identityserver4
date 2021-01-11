@@ -19,7 +19,9 @@ namespace AuthManagement.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureSqLite(Configuration);
+            services.InitializeConfigurations(Configuration);
+
+            services.ConfigureSqLite();
 
             services.ConfigureIdentity();
 

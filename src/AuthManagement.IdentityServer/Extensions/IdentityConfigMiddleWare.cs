@@ -18,7 +18,7 @@ namespace AuthManagement.IdentityServer.Extensions
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>(); ;
+              .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>();
         }
     }
 }
