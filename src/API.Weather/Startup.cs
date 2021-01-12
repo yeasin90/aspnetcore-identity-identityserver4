@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace AuthManagement.Weather
+namespace Api.Weather
 {
     public class Startup
     {
@@ -25,6 +25,10 @@ namespace AuthManagement.Weather
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Api server is up and running!");
+                });
             });
         }
     }

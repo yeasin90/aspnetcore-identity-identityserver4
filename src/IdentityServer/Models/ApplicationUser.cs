@@ -1,6 +1,4 @@
-﻿using AuthManagement.IdentityServer.Data;
-using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 namespace AuthManagement.IdentityServer.Models

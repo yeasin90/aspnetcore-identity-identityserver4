@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthManagement.IdentityServer", "IdentityServer\AuthManagement.IdentityServer.csproj", "{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthManagement.Hotels", "API.Hotels\AuthManagement.Hotels.csproj", "{16CFFB0C-677B-4371-9E4B-C2B1C87520E2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthManagement.Weather", "API.Weather\AuthManagement.Weather.csproj", "{0387C4D6-DB3C-4257-8F43-083C112EEC4D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{B626A89D-A5B7-449B-8AA6-8D4E64F28FEF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Hotels", "API.Hotels\Api.Hotels.csproj", "{99F6C844-CB79-4DC9-A7EF-0015EA40ED97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Weather", "API.Weather\Api.Weather.csproj", "{2A9EF78C-84D3-40FA-B956-010F228E8761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,21 +21,21 @@ Global
 		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA5EFFF-81B4-4AD3-81B4-5B089FD47D85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16CFFB0C-677B-4371-9E4B-C2B1C87520E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16CFFB0C-677B-4371-9E4B-C2B1C87520E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16CFFB0C-677B-4371-9E4B-C2B1C87520E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16CFFB0C-677B-4371-9E4B-C2B1C87520E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0387C4D6-DB3C-4257-8F43-083C112EEC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0387C4D6-DB3C-4257-8F43-083C112EEC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0387C4D6-DB3C-4257-8F43-083C112EEC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0387C4D6-DB3C-4257-8F43-083C112EEC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F6C844-CB79-4DC9-A7EF-0015EA40ED97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F6C844-CB79-4DC9-A7EF-0015EA40ED97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F6C844-CB79-4DC9-A7EF-0015EA40ED97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F6C844-CB79-4DC9-A7EF-0015EA40ED97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9EF78C-84D3-40FA-B956-010F228E8761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9EF78C-84D3-40FA-B956-010F228E8761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9EF78C-84D3-40FA-B956-010F228E8761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9EF78C-84D3-40FA-B956-010F228E8761}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{16CFFB0C-677B-4371-9E4B-C2B1C87520E2} = {B626A89D-A5B7-449B-8AA6-8D4E64F28FEF}
-		{0387C4D6-DB3C-4257-8F43-083C112EEC4D} = {B626A89D-A5B7-449B-8AA6-8D4E64F28FEF}
+		{99F6C844-CB79-4DC9-A7EF-0015EA40ED97} = {B626A89D-A5B7-449B-8AA6-8D4E64F28FEF}
+		{2A9EF78C-84D3-40FA-B956-010F228E8761} = {B626A89D-A5B7-449B-8AA6-8D4E64F28FEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C87E566E-6A28-4F28-97D4-AA67F0802EA0}

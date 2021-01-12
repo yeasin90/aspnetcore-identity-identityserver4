@@ -1,4 +1,4 @@
-﻿using AuthManagement.IdentityServer.Models;
+﻿using AuthManagement.IdentityServer.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

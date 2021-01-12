@@ -3,9 +3,9 @@ using IdentityModel;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace AuthManagement.IdentityServer.Data.Seeds
+namespace AuthManagement.IdentityServer.Configurations
 {
-    public static class DummyIdentityData
+    public static class IdentityConfigurations
     {
         public static List<ApplicationRole> ApplicationRoles => new List<ApplicationRole>
         {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace AuthManagement.Hotels
+namespace Api.Hotels
 {
     public class Startup
     {
@@ -24,7 +24,14 @@ namespace AuthManagement.Hotels
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapGet("/", async context =>
+                    {
+                        await context.Response.WriteAsync("Api server is up and running!");
+                    });
+                });
             });
         }
     }

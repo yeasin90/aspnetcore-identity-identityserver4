@@ -1,9 +1,9 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
 
-namespace AuthManagement.IdentityServer.Data.Seeds
+namespace AuthManagement.IdentityServer.Configurations
 {
-    public static class DummyIdentityServerData
+    public static class IdentityServerConfigurations
     {
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>

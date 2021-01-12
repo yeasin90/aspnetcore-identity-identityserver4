@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuthManagement.Hotels
+namespace Api.Hotels
 {
     public class Program
     {

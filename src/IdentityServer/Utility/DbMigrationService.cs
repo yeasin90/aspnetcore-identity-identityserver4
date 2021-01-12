@@ -7,7 +7,6 @@ namespace AuthManagement.IdentityServer.Utility
 {
     public class DbMigrationService : IDbMigrationService
     {
-
         public DbMigrationService(ApplicationDbContext identityDbContext
             , PersistedGrantDbContext persistedGrantDbContext
             , ConfigurationDbContext configurationDbContext)

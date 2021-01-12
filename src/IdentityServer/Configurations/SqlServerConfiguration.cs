@@ -1,4 +1,4 @@
-﻿namespace AuthManagement.IdentityServer.Models
+﻿namespace AuthManagement.IdentityServer.Configurations
 {
     public class SqlServerConfiguration
     {

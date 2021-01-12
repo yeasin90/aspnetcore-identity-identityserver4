@@ -1,4 +1,4 @@
-﻿using AuthManagement.IdentityServer.Data.Seeds;
+﻿using AuthManagement.IdentityServer.Configurations;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +34,7 @@ namespace AuthManagement.IdentityServer.Utility
         {
             using (var ctx = configurationDbContext)
             {
-                foreach (var apiScope in DummyIdentityServerData.ApiScopes)
+                foreach (var apiScope in IdentityServerConfigurations.ApiScopes)
                 {
                     if(!ctx.ApiScopes.Any(x => x.Name == apiScope.Name))
                     {
@@ -42,7 +42,7 @@ namespace AuthManagement.IdentityServer.Utility
                     }
                 }
 
-                foreach (var apiResource in DummyIdentityServerData.ApisResources)
+                foreach (var apiResource in IdentityServerConfigurations.ApisResources)
                 {
                     if (!ctx.ApiResources.Any(x => x.Name == apiResource.Name))
                     {
@@ -50,7 +50,7 @@ namespace AuthManagement.IdentityServer.Utility
                     }
                 }
 
-                foreach (var client in DummyIdentityServerData.Clients)
+                foreach (var client in IdentityServerConfigurations.Clients)
                 {
                     if (!ctx.Clients.Any(x => x.ClientId == client.ClientId))
                     {
@@ -66,7 +66,7 @@ namespace AuthManagement.IdentityServer.Utility
         {
             Log.Information("Started seeding user roles");
 
-            foreach (var applicationRole in DummyIdentityData.ApplicationRoles)
+            foreach (var applicationRole in IdentityConfigurations.ApplicationRoles)
             {
                 await RoleManager.CreateAsync(applicationRole);
             }
@@ -78,7 +78,7 @@ namespace AuthManagement.IdentityServer.Utility
         {
             Log.Information("Started seeding users");
 
-            foreach (var applicationUser in DummyIdentityData.ApplicationUsers)
+            foreach (var applicationUser in IdentityConfigurations.ApplicationUsers)
             {
                 await UserManager.CreateAsync(applicationUser, applicationUser.Password);
                 await UserManager.AddClaimsAsync(applicationUser, applicationUser.Claims);

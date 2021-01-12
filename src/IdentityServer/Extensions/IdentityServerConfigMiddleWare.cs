@@ -1,5 +1,4 @@
-﻿using AuthManagement.IdentityServer.Data.Seeds;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AuthManagement.IdentityServer.Extensions

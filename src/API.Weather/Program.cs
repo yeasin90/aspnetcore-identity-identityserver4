@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuthManagement.Weather
+namespace Api.Weather
 {
     public class Program
     {

@@ -1,7 +1,6 @@
-﻿using AuthManagement.IdentityServer.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace AuthManagement.IdentityServer.Data
+namespace AuthManagement.IdentityServer.Models
 {
     public class ApplicationRole : IdentityRole
     {
