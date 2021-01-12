@@ -10,7 +10,7 @@ namespace AuthManagement.Hotels
     {
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -24,10 +24,7 @@ namespace AuthManagement.Hotels
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
