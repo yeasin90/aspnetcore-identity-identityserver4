@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuthManagement.Api
+namespace AuthManagement.Weather
 {
     public class Startup
     {
