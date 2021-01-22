@@ -25,7 +25,7 @@ namespace Api.Weather
         {
             services.ConfigureApiVersioning();
 
-            services.InitializeGlobalConfigurations(Configuration);
+            services.BindGlobalConfigurations(Configuration);
 
             services.ConfigureJwt();
 

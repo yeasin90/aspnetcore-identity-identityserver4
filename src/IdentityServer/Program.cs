@@ -13,16 +13,15 @@ namespace AuthManagement.IdentityServer
     {
         public static void Main(string[] args)
         {
-            try
-            {
-                ConfigureLogger();
-                var host = CreateHostBuilder(args).Build();
-                host.Run();
-            }
-            catch(Exception ex)
-            {
-                Log.Error(ex, "Error on initializing application");
-            }
+            ConfigureLogger();
+            AppDomain.CurrentDomain.UnhandledException += HandleStartupException;
+            var host = CreateHostBuilder(args).Build();
+            host.Run();
+        }
+
+        private static void HandleStartupException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.Error((Exception)e.ExceptionObject, "Error on startup");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
