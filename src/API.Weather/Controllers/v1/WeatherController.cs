@@ -1,9 +1,11 @@
 ﻿using Api.Weather.Models;
+using Api.Weather.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Weather.Controllers.v1
 {
@@ -18,6 +20,12 @@ namespace Api.Weather.Controllers.v1
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        private readonly IAuthenticationService _authenticationService;
+        public WeatherController(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
+
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -29,6 +37,15 @@ namespace Api.Weather.Controllers.v1
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("token")]
+        public async Task<IActionResult> Token()
+        {
+            var token = await _authenticationService.GetToken("app.api.weather.read");
+            return Ok(token);
         }
     }
 }

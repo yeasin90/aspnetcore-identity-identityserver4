@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api.Weather
 {
@@ -13,7 +11,15 @@ namespace Api.Weather
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            ConfigureLogger();
+            AppDomain.CurrentDomain.UnhandledException += HandleStartupException;
+            var host = CreateHostBuilder(args).Build();
+            host.Run();
+        }
+
+        private static void HandleStartupException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.Error((Exception)e.ExceptionObject, "Error on startup");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +28,18 @@ namespace Api.Weather
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void ConfigureLogger()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+                .MinimumLevel.Override("System", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
+                .CreateLogger();
+        }
     }
 }
