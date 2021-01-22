@@ -1,6 +1,8 @@
-﻿using IdentityServer4.AccessTokenValidation;
+﻿using Api.Weather.Configurations;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 
 namespace Api.Weather.Extensions
@@ -9,11 +11,13 @@ namespace Api.Weather.Extensions
     {
         public static void ConfigureJwt(this IServiceCollection services)
         {
+            var idsConfig = services.BuildServiceProvider().GetService<IOptions<IdentityServerConfiguration>>();
+
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
                         // base-address of your identityserver
-                        options.Authority = "https://localhost:5001";
+                        options.Authority = idsConfig.Value.IdentityServerHost;
 
                         // if you are using API resources, you can specify the name here
                         options.Audience = "app.api.weather";
