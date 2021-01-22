@@ -51,7 +51,7 @@ namespace AuthManagement.IdentityServer
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("IdentityServer is up and running!");
                 });
             });
         }
