@@ -1,11 +1,12 @@
 ﻿using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AuthManagement.IdentityServer.Configurations
 {
-    public static class IdentityServerConfigurations
+    public class IdentityServerConfigurations : IIdentityServerConfiguration
     {
-        public static IEnumerable<ApiScope> ApiScopes =>
+        private static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
                 new ApiScope("app.api.hotels.read"),
@@ -15,7 +16,7 @@ namespace AuthManagement.IdentityServer.Configurations
                 new ApiScope("app.api.weather.write")
             };
 
-        public static IEnumerable<ApiResource> ApisResources =>
+        private static IEnumerable<ApiResource> ApisResources =>
             new List<ApiResource>
             {
                 new ApiResource
@@ -34,7 +35,7 @@ namespace AuthManagement.IdentityServer.Configurations
                 }
             };
 
-        public static List<Client> Clients => new List<Client>
+        private static List<Client> Clients => new List<Client>
             {
                 new Client
                     {
@@ -53,5 +54,20 @@ namespace AuthManagement.IdentityServer.Configurations
                          AllowedScopes = new List<string> { "app.api.weather.read" }, 
                     }
             };
+
+        public Task<IEnumerable<ApiResource>> GetApiResources()
+        {
+            return Task.FromResult(ApisResources);
+        }
+
+        public Task<IEnumerable<ApiScope>> GetApiScopes()
+        {
+            return Task.FromResult(ApiScopes);
+        }
+
+        public Task<List<Client>> GetIdentityServerClients()
+        {
+            return Task.FromResult(Clients);
+        }
     }
 }

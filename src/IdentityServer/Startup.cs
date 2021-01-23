@@ -1,3 +1,4 @@
+using AuthManagement.IdentityServer.Configurations;
 using AuthManagement.IdentityServer.Extensions;
 using AuthManagement.IdentityServer.Utility;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,8 @@ namespace AuthManagement.IdentityServer
 
             services.AddScoped<IDbMigrationService, DbMigrationService>();
             services.AddScoped<IDbSeedService, DbSeedService>();
+            services.AddSingleton<IIdentityConfiguration, IdentityConfigurations>();
+            services.AddSingleton<IIdentityServerConfiguration, IdentityServerConfigurations>();
         }
 
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)

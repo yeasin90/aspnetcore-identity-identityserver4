@@ -11,14 +11,20 @@ namespace AuthManagement.IdentityServer.Utility
     public class DbSeedService : IDbSeedService
     {
         private readonly ConfigurationDbContext configurationDbContext;
+        private readonly IIdentityConfiguration identityConfiguration;
+        private readonly IIdentityServerConfiguration identityServerConfiguration;
 
         public DbSeedService(UserManager<IdentityUser> userManager
             , RoleManager<IdentityRole> roleManager
-            , ConfigurationDbContext configurationDbContext)
+            , ConfigurationDbContext configurationDbContext
+            , IIdentityConfiguration identityConfiguration
+            , IIdentityServerConfiguration identityServerConfiguration)
         {
             UserManager = userManager;
             RoleManager = roleManager;
             this.configurationDbContext = configurationDbContext;
+            this.identityConfiguration = identityConfiguration;
+            this.identityServerConfiguration = identityServerConfiguration;
         }
 
         public UserManager<IdentityUser> UserManager { get; }
@@ -32,9 +38,13 @@ namespace AuthManagement.IdentityServer.Utility
 
         public async Task SeedIdentityServerDb()
         {
+            var apiScopes = await identityServerConfiguration.GetApiScopes();
+            var apiResources = await identityServerConfiguration.GetApiResources();
+            var identityServerClients = await identityServerConfiguration.GetIdentityServerClients();
+
             using (var ctx = configurationDbContext)
             {
-                foreach (var apiScope in IdentityServerConfigurations.ApiScopes)
+                foreach (var apiScope in apiScopes)
                 {
                     if(!ctx.ApiScopes.Any(x => x.Name == apiScope.Name))
                     {
@@ -42,7 +52,7 @@ namespace AuthManagement.IdentityServer.Utility
                     }
                 }
 
-                foreach (var apiResource in IdentityServerConfigurations.ApisResources)
+                foreach (var apiResource in apiResources)
                 {
                     if (!ctx.ApiResources.Any(x => x.Name == apiResource.Name))
                     {
@@ -50,7 +60,7 @@ namespace AuthManagement.IdentityServer.Utility
                     }
                 }
 
-                foreach (var client in IdentityServerConfigurations.Clients)
+                foreach (var client in identityServerClients)
                 {
                     if (!ctx.Clients.Any(x => x.ClientId == client.ClientId))
                     {
@@ -65,8 +75,9 @@ namespace AuthManagement.IdentityServer.Utility
         private async Task SeedIdentityRoles()
         {
             Log.Information("Started seeding user roles");
+            var appRoles = await identityConfiguration.GetApplicationRoles();
 
-            foreach (var applicationRole in IdentityConfigurations.ApplicationRoles)
+            foreach (var applicationRole in appRoles)
             {
                 await RoleManager.CreateAsync(applicationRole);
             }
@@ -77,8 +88,9 @@ namespace AuthManagement.IdentityServer.Utility
         private async Task SeedIdentityUsers()
         {
             Log.Information("Started seeding users");
+            var appUsers = await identityConfiguration.GetApplicationUsers();
 
-            foreach (var applicationUser in IdentityConfigurations.ApplicationUsers)
+            foreach (var applicationUser in appUsers)
             {
                 await UserManager.CreateAsync(applicationUser, applicationUser.Password);
                 await UserManager.AddClaimsAsync(applicationUser, applicationUser.Claims);

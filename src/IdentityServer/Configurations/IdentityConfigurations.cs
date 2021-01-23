@@ -2,12 +2,13 @@
 using IdentityModel;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AuthManagement.IdentityServer.Configurations
 {
-    public static class IdentityConfigurations
+    public class IdentityConfigurations : IIdentityConfiguration
     {
-        public static List<ApplicationRole> ApplicationRoles => new List<ApplicationRole>
+        private static List<ApplicationRole> ApplicationRoles => new List<ApplicationRole>
         {
             new ApplicationRole(RoleTypes.SuperAdmin),
             new ApplicationRole(RoleTypes.Admin),
@@ -15,7 +16,7 @@ namespace AuthManagement.IdentityServer.Configurations
             new ApplicationRole(RoleTypes.Basic)
         };
 
-        public static List<ApplicationUser> ApplicationUsers => new List<ApplicationUser>
+        private static List<ApplicationUser> ApplicationUsers => new List<ApplicationUser>
         {
             new ApplicationUser()
             {
@@ -46,5 +47,15 @@ namespace AuthManagement.IdentityServer.Configurations
                 }
             }
         };
+
+        public Task<List<ApplicationRole>> GetApplicationRoles()
+        {
+            return Task.FromResult(ApplicationRoles);
+        }
+
+        public Task<List<ApplicationUser>> GetApplicationUsers()
+        {
+            return Task.FromResult(ApplicationUsers);
+        }
     }
 }
